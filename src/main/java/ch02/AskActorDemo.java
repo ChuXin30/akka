@@ -37,7 +37,4 @@ public class AskActorDemo extends UntypedActor {
         } , system.dispatcher());
         System.out.println("continue");
     }
-
-
-
 }
