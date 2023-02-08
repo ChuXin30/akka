@@ -22,7 +22,21 @@ public class AskActorDemo extends UntypedActor {
         getSender().tell("hello  " + msg.toString()  , getSelf());
     }
 
+    public static void main(String[] args) {
+        ActorSystem system = ActorSystem.create("sys");
 
+        ActorRef ask_ref = system.actorOf(Props.create(AskActorDemo.class) , "AskActorDemo");
+        Timeout timeout = new Timeout(Duration.create(2 , "seconds"));
+        Future<Object> f = Patterns.ask(ask_ref , "Akka hello" , timeout);
+        f.onSuccess(new OnSuccess<Object>() {
+
+            @Override
+            public void onSuccess(Object o) throws Throwable {
+                System.out.println("收到消息 " + o.toString());
+            }
+        } , system.dispatcher());
+        System.out.println("continue");
+    }
 
 
 
