@@ -34,6 +34,7 @@ public class AskActorDemo extends UntypedActor {
             public void onSuccess(Object o) throws Throwable {
                 System.out.println("收到消息 " + o.toString());
             }
+
         } , system.dispatcher());
         System.out.println("continue");
     }
